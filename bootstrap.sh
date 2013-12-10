@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
-
 # Usamos el bash provisioner solo para instalar puppet.
+
+if which puppet > /dev/null 2>&1; then
+  echo "Puppet ya esta instalado."
+  exit 0
+fi
 
 OS=$1
 
