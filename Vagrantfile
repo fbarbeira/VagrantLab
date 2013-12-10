@@ -8,7 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "precise" do |precise|
     precise.vm.box = "precise64"
     precise.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
-    precise.vm.hostname = "vagrant-precise.dinaserver.com"
+    precise.vm.hostname = "vagrant-precise.server.com"
     precise.vm.provision :shell, :path => "bootstrap.sh", :args => "precise"
     precise.vm.provider :virtualbox do |v|
       v.name = "Ubuntu 12 LTS x64 (vagrant)"
@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "lucid" do |lucid|
     lucid.vm.box = "lucid64"
     lucid.vm.box_url = "http://files.vagrantup.com/lucid64.box"
-    lucid.vm.hostname = "vagrant-lucid.dinaserver.com"
+    lucid.vm.hostname = "vagrant-lucid.server.com"
     lucid.vm.provision :shell, :path => "bootstrap.sh", :args => "lucid"
     config.vm.provider "virtualbox" do |v|
       v.name = "Ubuntu 10 LTS x64 (vagrant)"
