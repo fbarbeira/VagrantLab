@@ -18,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     lucid.vm.box = "lucid64"
     lucid.vm.box_url = "http://files.vagrantup.com/lucid64.box"
     lucid.vm.hostname = "va-lucid.puppet.lan"
-    config.vm.provider "virtualbox" do |v|
+    lucid.vm.provider "virtualbox" do |v|
       v.name = "Ubuntu 10 LTS x64 (vagrant)"
     end
   end
