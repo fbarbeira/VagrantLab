@@ -9,7 +9,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     precise.vm.box = "precise64"
     precise.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
     precise.vm.hostname = "va-precise.puppet.lan"
-    precise.vm.network "public_network", :bridge => "en0: Ethernet"
     precise.vm.provider :virtualbox do |v|
       v.name = "Ubuntu 12 LTS x64 (vagrant)"
     end
@@ -24,12 +23,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "wheezy" do |wheezy|
-    wheezy.vm.box = "wheezy64"
-    wheezy.vm.box_url = "https://dl.dropboxusercontent.com/u/197673519/debian-7.2.0.box"
-    wheezy.vm.hostname = "va-wheezy.puppet.lan"
-    wheezy.vm.provider "virtualbox" do |v|
-      v.name = "Debian 7 x64 (vagrant)"
+  config.vm.define "packager" do |packager|
+    packager.vm.box = "precise64"
+    packager.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+    packager.vm.hostname = "packager.puppet.lan"
+    packager.vm.provider "virtualbox" do |v|
+      v.name = "Packager (vagrant)"
+      v.memory = 512
     end
   end
 
