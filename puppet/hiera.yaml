@@ -1,0 +1,11 @@
+---
+:backends:
+  - yaml
+
+:yaml:
+  :datadir: /vagrant/puppet/hieradata
+
+:hierarchy:
+  - %{::environment}/%{::clientcert}
+  - %{::environment}/%{::lsbdistcodename}
+  - %{::environment}/common
