@@ -1,25 +1,30 @@
 #!/usr/bin/env bash
-# Bootstrap para ubuntu y debian.
-# Solamente instala puppet.
+# Bootstrap for ubuntu and debian.
+# This program only installs puppet.
 
 set -e
 
 OS=$(lsb_release -c -s)
-REPO_DEB_URL="https://apt.puppetlabs.com/puppetlabs-release-${OS}.deb"
+REL_FILE="puppetlabs-release-${OS}.deb"
+REPO_DEB_URL="https://apt.puppetlabs.com/${REL_FILE}"
 
 if [ "$EUID" -ne "0" ]; then
   echo "This script must be run as root." >&2
   exit 1
 fi
 
-echo "Configurando repositorio PuppetLabs... "
-wget -qO /tmp/puppetlabs-release-${OS}.deb ${REPO_DEB_URL} 2>/dev/null
-dpkg -i /tmp/puppetlabs-release-${OS}.deb >/dev/null
-rm -f /tmp/puppetlabs-release-${OS}.deb
-aptitude update >/dev/null
+if [ ! `dpkg -l | grep 'puppet'` ]; then
+  echo "Configuring Puppetlabs repository... "
+  wget -qO "/tmp/${REL_FILE}" ${REPO_DEB_URL} 2>/dev/null
+  dpkg -i "/tmp/${REL_FILE}" >/dev/null
+  rm -f "/tmp/${REL_FILE}"
+  aptitude update >/dev/null
 
-echo "Actualizando sistema... "
-aptitude safe-upgrade -y >/dev/null
+  echo "Updating system... "
+  aptitude safe-upgrade -y >/dev/null
 
-echo "Instalando puppet... "
-aptitude install puppet -y >/dev/null
+  echo "Installing puppet... "
+  aptitude install puppet -y >/dev/null
+else
+  echo "Puppet is already installed."
+fi
