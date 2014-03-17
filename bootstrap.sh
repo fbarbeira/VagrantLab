@@ -8,12 +8,12 @@ OS=$(lsb_release -c -s)
 REL_FILE="puppetlabs-release-${OS}.deb"
 REPO_DEB_URL="https://apt.puppetlabs.com/${REL_FILE}"
 
-if [ "$EUID" -ne "0" ]; then
+if [[ "$EUID" -ne "0" ]]; then
   echo "This script must be run as root." >&2
   exit 1
 fi
 
-if [ ! `dpkg -l | grep 'puppet'` ]; then
+if [[ ! `dpkg -l | grep 'puppet'` ]]; then
   echo "Configuring Puppetlabs repository... "
   wget -qO "/tmp/${REL_FILE}" ${REPO_DEB_URL} 2>/dev/null
   dpkg -i "/tmp/${REL_FILE}" >/dev/null
