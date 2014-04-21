@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     trusty.vm.box = "trusty64"
     trusty.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
     trusty.vm.hostname = "va-trusty.puppet.lan"
-    trusty.vm.provider = "virtualbox" do |v|
+    trusty.vm.provider "virtualbox" do |v|
       v.name = "Ubuntu 14 LTS x64 (vagrant)"
     end
   end
