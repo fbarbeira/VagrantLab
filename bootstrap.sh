@@ -14,6 +14,9 @@ if [[ "$EUID" -ne "0" ]]; then
 fi
 
 if [[ $(/usr/bin/dpkg -l) != *puppetlabs* ]]; then
+  if [[ ${OS} -eq 'trusty' ]]; then
+    aptitude purge -y ruby-hiera >/dev/null
+  fi
   echo "Configuring Puppetlabs repository... "
   wget -qO "/tmp/${REL_FILE}" ${REPO_DEB_URL} 2>/dev/null
   dpkg -i "/tmp/${REL_FILE}" >/dev/null
