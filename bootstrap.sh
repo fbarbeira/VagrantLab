@@ -13,7 +13,7 @@ if [[ "$EUID" -ne "0" ]]; then
   exit 1
 fi
 
-if [[ $(/usr/bin/puppet -V) != *3.4* ]]; then
+if [[ $(/usr/bin/dpkg -l) != *puppetlabs* ]]; then
   echo "Configuring Puppetlabs repository... "
   wget -qO "/tmp/${REL_FILE}" ${REPO_DEB_URL} 2>/dev/null
   dpkg -i "/tmp/${REL_FILE}" >/dev/null
