@@ -31,6 +31,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       v.name = "Ubuntu 10 LTS x64 (vagrant)"
     end
   end
+  
+  config.vm.define "wheezy" do |wheezy|
+    wheezy.vm.box = "wheezy64"
+    wheezy.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.4_chef-provisionerless.box"
+    wheezy.vm.hostname = "va-wheezy.puppet.lan"
+    wheezy.vm.provider "virtualbox" do |v|
+      v.name = "Wheezy 7.4 x64 (vagrant)"
+    end
+  end
 
   config.vm.define "packager" do |packager|
     packager.vm.box = "precise64"
