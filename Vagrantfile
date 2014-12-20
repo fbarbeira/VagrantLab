@@ -19,15 +19,6 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  config.vm.define "lucid" do |lucid|
-    lucid.vm.box = "lucid64"
-    lucid.vm.box_url = "http://files.vagrantup.com/lucid64.box"
-    lucid.vm.hostname = "va-lucid.puppet.lan"
-    lucid.vm.provider "virtualbox" do |v|
-      v.name = "Ubuntu 10 LTS x64 (vagrant)"
-    end
-  end
-
   config.vm.define "wheezy" do |wheezy|
     wheezy.vm.box = "puppetlabs/debian-7.6-64-nocm"
     wheezy.vm.hostname = "va-wheezy.puppet.lan"
