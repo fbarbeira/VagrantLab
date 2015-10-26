@@ -19,11 +19,11 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  config.vm.define "wheezy" do |wheezy|
-    wheezy.vm.box = "puppetlabs/debian-7.6-64-nocm"
-    wheezy.vm.hostname = "va-wheezy.puppet.lan"
-    wheezy.vm.provider "virtualbox" do |v|
-      v.name = "Debian 7 x64 (vagrant)"
+  config.vm.define "jessie" do |jessie|
+    jessie.vm.box = "debian/jessie64"
+    jessie.vm.hostname = "va-jessie.puppet.lan"
+    jessie.vm.provider "virtualbox" do |v|
+      v.name = "Debian 8 x64 (vagrant)"
     end
   end
 
