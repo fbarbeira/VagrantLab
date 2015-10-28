@@ -1,11 +1,9 @@
 ---
 :backends:
   - yaml
-
-:yaml:
-  :datadir: /vagrant/puppet/hieradata
-
 :hierarchy:
-  - %{::environment}/%{::clientcert}
-  - %{::environment}/%{::lsbdistcodename}
-  - %{::environment}/common
+  - "nodes/%{::trusted.certname}"
+  - "distrocodename/%{facts.os.distro.codename}"
+  - common
+:yaml:
+  :datadir: "/vagrant/puppet/hieradata"
