@@ -5,7 +5,7 @@
 set -e
 
 OS=$(lsb_release -c -s)
-RELEASE_FILE="puppetlabs-release-${OS}.deb"
+RELEASE_FILE="puppetlabs-release-pc1-${OS}.deb"
 REPO_DEB_URL="https://apt.puppetlabs.com/${RELEASE_FILE}"
 
 if [[ "$EUID" -ne "0" ]]; then
@@ -14,6 +14,10 @@ if [[ "$EUID" -ne "0" ]]; then
 fi
 
 if [[ $(/usr/bin/dpkg -l) != *puppetlabs* ]]; then
+
+  echo "Purge previous puppet versions... "
+  DEBIAN_FRONTEND=noninteractive aptitude purge puppet puppet-common -y >/dev/null
+
   echo "Configuring Puppetlabs repository... "
   wget -qO "/tmp/${RELEASE_FILE}" ${REPO_DEB_URL} >/dev/null
   dpkg -i "/tmp/${RELEASE_FILE}" >/dev/null
@@ -25,10 +29,7 @@ if [[ $(/usr/bin/dpkg -l) != *puppetlabs* ]]; then
   echo "Upgrading system... "
   DEBIAN_FRONTEND=noninteractive aptitude safe-upgrade -q -y >/dev/null
   echo "Installing puppet... "
-  aptitude install puppet -y >/dev/null
-
-  # Remove deprecated 'templatedir' var.
-  sed -i '/templatedir=\$confdir\/templates/d' /etc/puppet/puppet.conf
+  aptitude install puppet-agent -y >/dev/null
 
 else
   echo "Puppet is already installed."
