@@ -30,6 +30,9 @@ if [[ $(/usr/bin/dpkg -l) != *puppetlabs* ]]; then
       rm -f /etc/dpkg/dpkg.cfg.d/multiarch
   fi
 
+  echo "Removing deb-src sources..."
+  sed -i '/deb-src/d' /etc/apt/sources.list
+  
   echo "Updating system..."
   aptitude update >/dev/null
 
