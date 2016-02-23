@@ -22,6 +22,13 @@ if [[ $(/usr/bin/dpkg -l) != *puppetlabs* ]]; then
   wget -qO "/tmp/${RELEASE_FILE}" ${REPO_DEB_URL} >/dev/null
   dpkg -i "/tmp/${RELEASE_FILE}" >/dev/null
   rm -f "/tmp/${RELEASE_FILE}"
+  
+  echo "Removing i386 architecture..."
+  if [[ "${OS}" == "trusty" ]]; then
+      dpkg --remove-architecture i386
+  elif [[ "${OS}" == "precise" ]]; then
+      rm -f /etc/dpkg/dpkg.cfg.d/multiarch
+  fi
 
   echo "Updating system..."
   aptitude update >/dev/null
