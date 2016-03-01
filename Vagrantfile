@@ -49,7 +49,7 @@ Vagrant.configure(2) do |config|
   #config.vm.network :forwarded_port, guest: 80, host: 8080, id: "web"
   config.vm.provision :shell, :path => "provision/bootstrap.sh"
   config.vm.provision "puppet" do |puppet|
-    puppet.binary_path = "$GEM_HOME/bin"
+    puppet.binary_path = "/opt/puppetlabs/bin/"
     puppet.module_path = "puppet/modules"
     puppet.environment_path = "puppet/environments"
     puppet.environment = "production"
