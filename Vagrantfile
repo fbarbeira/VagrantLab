@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
   config.vm.synced_folder "puppet/", "/vagrant", type: "rsync",
-  rsync__exclude: ["Version3/", ".git/"],
+  rsync__exclude: ["Version3/", ".git/"]
 
   config.vm.define "trusty" do |trusty|
     trusty.vm.box = "ubuntu/trusty64"
